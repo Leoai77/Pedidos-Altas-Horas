@@ -77,7 +77,7 @@ export default function App() {
     message += `\n*Total: ${formatPrice(cartTotal)}*`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/5531999999999?text=${encodedMessage}`, "_blank");
+    window.open(`https://w.app/4pk7xl?text=${encodedMessage}`, "_blank");
   };
 
   return (
