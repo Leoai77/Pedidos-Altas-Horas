@@ -44,4 +44,9 @@ export const menuData: MenuItem[] = [
   { id: 'c1', name: 'Picanha c/ Fritas e Mandioca na Manteiga (400g)', description: 'Picanha AA [400g] acompanhada das nossas fritas secretas [200g] e mandioca cozida na manteiga de garrafa [200g]', price: 149.90, category: 'Chapas', image: 'https://picsum.photos/seed/picanha/400/400' },
   { id: 'c2', name: 'Picanha c/ Fritas e Mandioca na Manteiga (600g)', description: 'Picanha AA [600g] acompanhada das nossas fritas secretas [200g] e mandioca cozida na manteiga de garrafa [200g], pode pedir que é sucesso!', price: 199.90, category: 'Chapas', image: 'https://picsum.photos/seed/picanhalarge/400/400' },
   { id: 'c3', name: 'Chapa Altas', description: 'Filé mignon, fritas, mandioquinha, linguiça, pimenta biquinho, queijo, bacon, iscas de frango, torresmo, azeitona', price: 199.90, category: 'Chapas', image: 'https://picsum.photos/seed/mixedgrill/400/400' },
+
+  // BEBIDAS
+  { id: 'b1', name: 'Devassa', price: 7.00, category: 'Bebidas', image: 'https://picsum.photos/seed/beer/400/400' },
+  { id: 'b2', name: 'Skol', price: 7.00, category: 'Bebidas', image: 'https://picsum.photos/seed/skol/400/400' },
+  { id: 'b3', name: 'Caipiroska', price: 7.00, category: 'Bebidas', image: 'https://picsum.photos/seed/caipiroska/400/400' },
 ];
