@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-script: "Playball", cursive;
+  --color-gold-400: #F4D06F;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #AA8C2C;
+  --color-gold-900: #42360E;
+}
 
 @layer utilities {
   .hide-scrollbar {
@@ -7,5 +16,19 @@
   }
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1c1917;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #44403c;
+    border-radius: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #57534e;
   }
 }
