@@ -77,7 +77,7 @@ export default function App() {
     message += `\n*Total: ${formatPrice(cartTotal)}*`;
 
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://w.app/4pk7xl?text=${encodedMessage}`, "_blank");
+    window.open(`https://api.whatsapp.com/send/?phone=%2B5511949887769&text=${encodedMessage}&type=phone_number&app_absent=0&wame_ctl=1`, "_blank");
   };
 
   return (
