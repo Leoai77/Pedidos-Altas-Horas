@@ -18,6 +18,7 @@ export default function App() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("Entradas");
+  const [tableNumber, setTableNumber] = useState("");
 
   const categories = useMemo(
     () => Array.from(new Set(menuData.map((item) => item.category))),
@@ -69,8 +70,12 @@ export default function App() {
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
+    if (!tableNumber) {
+      alert("Por favor, informe o número da mesa.");
+      return;
+    }
 
-    let message = "Olá! Gostaria de fazer o seguinte pedido:\n\n";
+    let message = `*PEDIDO - MESA ${tableNumber}*\n\n`;
     cart.forEach((item) => {
       message += `${item.quantity}x ${item.name} - ${formatPrice(item.price * item.quantity)}\n`;
     });
@@ -345,6 +350,19 @@ export default function App() {
 
             {cart.length > 0 && (
               <div className="p-4 bg-stone-50 border-t border-stone-200">
+                <div className="mb-4">
+                  <label htmlFor="table-number" className="block text-sm font-bold text-stone-700 mb-1">
+                    Número da Mesa
+                  </label>
+                  <input
+                    type="number"
+                    id="table-number"
+                    value={tableNumber}
+                    onChange={(e) => setTableNumber(e.target.value)}
+                    placeholder="Ex: 5"
+                    className="w-full px-4 py-3 rounded-xl border border-stone-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-all bg-white font-medium"
+                  />
+                </div>
                 <div className="flex justify-between items-center mb-4 text-lg">
                   <span className="font-semibold text-stone-600">Total</span>
                   <span className="font-black text-2xl text-red-700">
