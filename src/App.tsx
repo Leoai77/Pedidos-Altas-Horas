@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   ShoppingCart,
   Plus,
@@ -9,12 +9,48 @@ import {
   Phone,
   ChevronRight,
   X,
+  Loader2,
 } from "lucide-react";
 import { menuData, MenuItem } from "./data/menu";
 
 type CartItem = MenuItem & { quantity: number };
 
+function SplashScreen({ onFinish }: { onFinish: () => void }) {
+  useEffect(() => {
+    const timer = setTimeout(onFinish, 2500);
+    return () => clearTimeout(timer);
+  }, [onFinish]);
+
+  return (
+    <div className="fixed inset-0 bg-stone-950 flex flex-col items-center justify-center z-50 animate-out fade-out duration-1000 fill-mode-forwards">
+      <div className="relative">
+        <div className="absolute inset-0 bg-gold-500/20 blur-3xl rounded-full animate-pulse"></div>
+        <div className="relative flex flex-col items-center">
+          <div className="w-32 h-32 mb-6 relative">
+            <svg viewBox="0 0 512 512" className="w-full h-full drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]">
+              <circle cx="256" cy="256" r="200" fill="none" stroke="#D4AF37" strokeWidth="20" className="animate-[spin_10s_linear_infinite]" />
+              <path d="M256 100 V256 L350 350" stroke="#D4AF37" strokeWidth="20" strokeLinecap="round" className="origin-center animate-[spin_60s_linear_infinite]" />
+              <path d="M320 280 L420 280 L440 420 L300 420 Z" fill="#D4AF37" stroke="#D4AF37" strokeWidth="10" strokeLinejoin="round" />
+              <path d="M340 280 Q370 220 400 280" fill="none" stroke="#D4AF37" strokeWidth="10" />
+            </svg>
+          </div>
+          <h1 className="text-5xl font-script text-gold-500 tracking-wide mb-2 animate-in slide-in-from-bottom-4 duration-1000">
+            Altas Horas
+          </h1>
+          <p className="text-stone-400 text-xs font-medium tracking-[0.3em] uppercase animate-in slide-in-from-bottom-4 duration-1000 delay-200">
+            App de Pedidos
+          </p>
+          <div className="mt-12">
+            <Loader2 className="w-6 h-6 text-gold-500 animate-spin" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("Entradas");
@@ -24,6 +60,10 @@ export default function App() {
     () => Array.from(new Set(menuData.map((item) => item.category))),
     [],
   );
+
+  if (showSplash) {
+    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
 
   const addToCart = (item: MenuItem) => {
     setCart((prev) => {
@@ -153,7 +193,7 @@ export default function App() {
             </div>
             <div className="text-sm">
               <p className="font-bold text-stone-200 uppercase tracking-wide text-xs mb-0.5">Localização</p>
-              <p className="text-gold-400/80">Av. Fleming, 123 - Ouro Preto</p>
+              <p className="text-gold-400/80">Rod. Ce-Tarcísio Monteiro, 1000 - Conj. Gama, Icó - CE, 63430-000</p>
             </div>
           </div>
         </div>
