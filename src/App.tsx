@@ -55,6 +55,7 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("Entradas");
   const [tableNumber, setTableNumber] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const categories = useMemo(
     () => Array.from(new Set(menuData.map((item) => item.category))),
@@ -114,8 +115,13 @@ export default function App() {
       alert("Por favor, informe o número da mesa.");
       return;
     }
+    if (!paymentMethod) {
+      alert("Por favor, selecione uma forma de pagamento.");
+      return;
+    }
 
-    let message = `*PEDIDO - MESA ${tableNumber}*\n\n`;
+    let message = `*PEDIDO - MESA ${tableNumber}*\n`;
+    message += `*PAGAMENTO: ${paymentMethod}*\n\n`;
     cart.forEach((item) => {
       message += `${item.quantity}x ${item.name} - ${formatPrice(item.price * item.quantity)}\n`;
     });
@@ -412,6 +418,28 @@ export default function App() {
                     className="w-full px-4 py-3.5 rounded-xl border border-white/10 bg-black text-white placeholder-stone-600 focus:ring-1 focus:ring-gold-500 focus:border-gold-500 outline-none transition-all font-mono text-lg"
                   />
                 </div>
+
+                <div className="mb-6">
+                  <label className="block text-xs font-bold text-gold-500 mb-2 uppercase tracking-widest">
+                    Forma de Pagamento
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {["Crédito", "Débito", "PIX", "Dinheiro"].map((method) => (
+                      <button
+                        key={method}
+                        onClick={() => setPaymentMethod(method)}
+                        className={`px-4 py-3 rounded-xl border font-medium text-sm transition-all ${
+                          paymentMethod === method
+                            ? "bg-gold-500 text-black border-gold-500 shadow-lg shadow-gold-500/20"
+                            : "bg-black text-stone-400 border-white/10 hover:border-gold-500/50 hover:text-gold-400"
+                        }`}
+                      >
+                        {method}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="flex justify-between items-center mb-6">
                   <span className="font-medium text-stone-400 uppercase tracking-wide text-sm">Total</span>
                   <span className="font-script text-4xl text-gold-500">
